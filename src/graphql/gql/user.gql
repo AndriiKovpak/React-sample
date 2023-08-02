@@ -1,0 +1,100 @@
+fragment user on UserEntity {
+  id
+  firstName
+  lastName
+  avatar
+  email
+  emailVerified
+  firmId
+  samplePermission
+  firmPermission
+  timezone
+}
+
+query GetUsers($take: Int!, $skip: Int!, $search: String) {
+  getUsers(take: $take, skip: $skip, search: $search) {
+    ...user
+  }
+}
+
+query getUser($userId: String!) {
+  getUser(userId: $userId) {
+    ...user
+  }
+}
+mutation CreateUser(
+  $email: String!
+  $firmId: String!
+  $password: String!
+  $firstName: String!
+  $lastName: String!
+  $timezone: String!
+  $emailVerified: Boolean!
+  $firmPermission: EFirmPermission
+  $samplePermission: ELobbymaticPermission
+) {
+  createUser(
+    email: $email
+    firmId: $firmId
+    firstName: $firstName
+    lastName: $lastName
+    password: $password
+    timezone: $timezone
+    emailVerified: $emailVerified
+    firmPermission: $firmPermission
+    samplePermission: $samplePermission
+  ) {
+    ...user
+  }
+}
+
+mutation UpdateUser(
+  $email: String!
+  $id: String!
+  $firstName: String!
+  $lastName: String!
+  $password: String
+  $firmPermission: EFirmPermission
+  $samplePermission: ELobbymaticPermission
+) {
+  updateUser(
+    id: $id
+    firstName: $firstName
+    lastName: $lastName
+    email: $email
+    firmPermission: $firmPermission
+    samplePermission: $samplePermission
+    password: $password
+  ) {
+    ...user
+  }
+}
+
+mutation DeleteUser($userId: String!) {
+  deleteUser(userId: $userId)
+}
+
+query Me {
+  me {
+    ...user
+  }
+}
+
+mutation Login($email: String!, $password: String!) {
+  login(email: $email, password: $password) {
+    ...user
+  }
+}
+mutation Logout {
+  logout
+}
+
+mutation GetUserAvatarSignedUrl($hash: String!, $ext: EImageExtension!) {
+  getUserAvatarSignedUrl(hash: $hash, ext: $ext)
+}
+
+mutation SetUserAvatar {
+  setUserAvatar {
+    ...user
+  }
+}

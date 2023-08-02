@@ -1,0 +1,51 @@
+fragment task on TaskEntity {
+  id
+  objective
+  status
+  dueDate
+  clientId
+  workspaceId
+  firmId
+  assigneeId
+  dueDate
+  description
+}
+query GetTasks($firmId: String!, $workspaceId: String, $assigneeId: String, $clientId: String) {
+  getTasks(firmId: $firmId, workspaceId: $workspaceId, assigneeId: $assigneeId, clientId: $clientId) {
+    ...task
+  }
+}
+query GetTask($taskId: String!) {
+  getTask(taskId: $taskId) {
+    ...task
+  }
+}
+mutation CreateTask(
+  $clientId: String!
+  $workspaceId: String!
+  $objective: String!
+  $dueDate: String!
+  $description: String!
+  $status: ETaskStatus!
+) {
+  createTask(
+    clientId: $clientId
+    workspaceId: $workspaceId
+    objective: $objective
+    dueDate: $dueDate
+    description: $description
+    status: $status
+  ) {
+    ...task
+  }
+}
+mutation UpdateTask($taskId: String!, $objective: String!, $description: String!, $status: ETaskStatus!, $dueDate: String!) {
+  updateTask(taskId: $taskId, objective: $objective, description: $description, status: $status, dueDate: $dueDate) {
+    ...task
+  }
+}
+mutation DeleteTask($taskId: String!) {
+  deleteTask(taskId: $taskId) {
+    ...task
+  }
+}

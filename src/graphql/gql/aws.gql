@@ -1,0 +1,3 @@
+query getS3ContentTypes {
+  getS3ContentTypes
+}

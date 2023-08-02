@@ -1,0 +1,34 @@
+fragment workspace on WorkspaceEntity {
+  id
+  name
+  firmId
+  createdAt
+}
+
+query GetWorkspaces($take: Int!, $skip: Int!, $search: String) {
+  getWorkspaces(take: $take, skip: $skip, search: $search) {
+    ...workspace
+  }
+}
+
+query GetWorkspace($workspaceId: String!) {
+  getWorkspace(workspaceId: $workspaceId) {
+    ...workspace
+  }
+}
+
+mutation CreateWorkspace($name: String!, $firmId: String!) {
+  createWorkspace(firmId: $firmId, name: $name) {
+    ...workspace
+  }
+}
+
+mutation UpdateWorkspace($id: String!, $name: String!) {
+  updateWorkspace(id: $id, name: $name) {
+    ...workspace
+  }
+}
+
+mutation DeleteWorkspace($workspaceId: String!) {
+  deleteWorkspace(workspaceId: $workspaceId)
+}

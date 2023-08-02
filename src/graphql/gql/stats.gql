@@ -1,0 +1,19 @@
+fragment stats on StatsDTO {
+  id
+  firmCount
+  workspaceCount
+  clientCount
+  userCount
+  completions
+  userSavedCompletions
+  openAiTokens
+  openAiCost
+  anthropicTokens
+  anthropicCost
+}
+
+query GetStats {
+  getStats {
+    ...stats
+  }
+}

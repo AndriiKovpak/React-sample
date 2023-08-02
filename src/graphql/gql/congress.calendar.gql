@@ -1,0 +1,23 @@
+fragment congressCalendarItem on CongressCalendarItemEntity {
+  id
+  type
+  holiday
+  date
+}
+
+query GetCongressCalendar {
+  getCongressCalendar {
+    ...congressCalendarItem
+  }
+}
+
+mutation CreateCongressCalendarItem($type: ECongressCalendarItemType!, $date: String!, $holiday: String) {
+  createCongressCalendarItem(type: $type, date: $date, holiday: $holiday) {
+    ...congressCalendarItem
+  }
+}
+mutation updateCongressCalendarItem($congressCalendarItemId: String!, $type: ECongressCalendarItemType!, $date: String!, $holiday: String) {
+  updateCongressCalendarItem(congressCalendarItemId: $congressCalendarItemId, type: $type, date: $date, holiday: $holiday) {
+    ...congressCalendarItem
+  }
+}

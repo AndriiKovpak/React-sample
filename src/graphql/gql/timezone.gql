@@ -1,0 +1,9 @@
+query GetTimezones {
+  getTimezones {
+    abbrev
+    altName
+    label
+    offset
+    value
+  }
+}

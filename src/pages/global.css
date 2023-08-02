@@ -1,0 +1,15 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.slick-dots li.slick-active button:before {
+  color: white !important;
+}
+
+.slick-dots li button:before {
+  color: #8f92ab !important;
+}
+
+.btn {
+  @apply flex items-center justify-center rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600;
+}

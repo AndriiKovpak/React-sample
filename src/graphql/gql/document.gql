@@ -1,0 +1,31 @@
+fragment document on DocumentEntity {
+  id
+  displayName
+  hash
+  ext
+  url
+  createdAt
+  userId
+  workspaceId
+  clientId
+}
+
+query GetDocuments($take: Int!, $skip: Int!, $workspaceId: String!, $clientId: String!) {
+  getDocuments(take: $take, skip: $skip, workspaceId: $workspaceId, clientId: $clientId) {
+    ...document
+  }
+}
+
+mutation GetDocumentSignedUrl($displayName: String!, $workspaceId: String!, $clientId: String!, $hash: String!, $ext: EExtension!) {
+  getDocumentSignedUrl(displayName: $displayName, workspaceId: $workspaceId, clientId: $clientId, hash: $hash, ext: $ext)
+}
+
+mutation CreateDocument {
+  createDocument {
+    ...document
+  }
+}
+
+mutation DeleteDocument($documentId: String!) {
+  deleteDocument(documentId: $documentId)
+}

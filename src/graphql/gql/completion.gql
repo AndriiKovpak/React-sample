@@ -1,0 +1,90 @@
+fragment completion on CompletionEntity {
+  id
+  displayName
+  promptId
+  userPrompt
+  completion
+  createdAt
+}
+
+fragment model on ModelDTO {
+  provider
+  model
+}
+
+fragment currentModels on CurrentModelsDTO {
+  smallToken {
+    ...model
+  }
+  largeToken {
+    ...model
+  }
+}
+
+query GetCurrentModels {
+  getCurrentModels {
+    ...currentModels
+  }
+}
+
+query GetCompletions($promptId: String!, $skip: Int!, $take: Int!) {
+  getCompletions(promptId: $promptId, skip: $skip, take: $take) {
+    ...completion
+  }
+}
+
+mutation SaveCompletion(
+  $provider: EAiProvider!
+  $model: String!
+  $promptId: String!
+  $systemPrompt: String!
+  $userPrompt: String!
+  $completion: String!
+  $displayName: String!
+  $clientId: String
+) {
+  saveCompletion(
+    provider: $provider
+    model: $model
+    promptId: $promptId
+    systemPrompt: $systemPrompt
+    userPrompt: $userPrompt
+    completion: $completion
+    displayName: $displayName
+    clientId: $clientId
+  ) {
+    ...completion
+  }
+}
+
+mutation UnsaveCompletion($completionId: String!) {
+  unsaveCompletion(completionId: $completionId)
+}
+
+mutation EditCompletion($completionId: String!, $completion: String!) {
+  editCompletion(completionId: $completionId, completion: $completion) {
+    ...completion
+  }
+}
+
+mutation logCompletion(
+  $provider: EAiProvider!
+  $model: String!
+  $promptId: String!
+  $systemPrompt: String!
+  $userPrompt: String!
+  $clientId: String
+) {
+  logCompletion(
+    provider: $provider
+    model: $model
+    promptId: $promptId
+    systemPrompt: $systemPrompt
+    userPrompt: $userPrompt
+    clientId: $clientId
+  )
+}
+
+mutation logCompletionResponse($completionId: String!, $completion: String!) {
+  logCompletionResponse(completionId: $completionId, completion: $completion)
+}

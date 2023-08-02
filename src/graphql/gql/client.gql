@@ -1,0 +1,37 @@
+fragment client on ClientEntity {
+  id
+  name
+  description
+  objective
+  createdAt
+  firmId
+  workspaceId
+}
+
+query GetClients($take: Int!, $skip: Int!, $firmId: String, $workspaceId: String, $search: String) {
+  getClients(take: $take, skip: $skip, firmId: $firmId, workspaceId: $workspaceId, search: $search) {
+    ...client
+  }
+}
+
+query getClient($clientId: String!) {
+  getClient(clientId: $clientId) {
+    ...client
+  }
+}
+
+mutation CreateClient($name: String!, $description: String!, $firmId: String!, $objective: String!, $workspaceId: String!) {
+  createClient(description: $description, firmId: $firmId, name: $name, objective: $objective, workspaceId: $workspaceId) {
+    ...client
+  }
+}
+
+mutation UpdateClient($id: String!, $name: String!, $description: String!, $objective: String!, $workspaceId: String!) {
+  updateClient(id: $id, description: $description, name: $name, objective: $objective, workspaceId: $workspaceId) {
+    ...client
+  }
+}
+
+mutation DeleteClient($clientId: String!) {
+  deleteClient(clientId: $clientId)
+}

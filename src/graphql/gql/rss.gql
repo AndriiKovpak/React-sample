@@ -1,0 +1,50 @@
+fragment rssSubscription on RssSubscriptionEntity {
+  subscription_id
+  status
+  feed_type
+  url
+  info
+  createdAt
+}
+
+fragment rssEntry on RssEntryEntity {
+  guid
+  title
+  link
+  time
+  subscription_id
+}
+
+query GetAllRssSubscriptions {
+  getAllRssSubscriptions {
+    ...rssSubscription
+  }
+}
+
+query GetMyRssSubs {
+  getMyRssSubs {
+    ...rssSubscription
+  }
+}
+
+query GetMyRssEntries($skip: Int!, $take: Int!) {
+  getMyRssEntries(skip: $skip, take: $take) {
+    ...rssEntry
+  }
+}
+
+mutation CreateRssSubscription($url: String!) {
+  createRssSubscription(url: $url) {
+    ...rssSubscription
+  }
+}
+
+mutation DeleteRssSubscription($subscription_id: String!) {
+  deleteRssSubscription(subscription_id: $subscription_id)
+}
+
+subscription MyRssFeed {
+  myRssFeed {
+    ...rssEntry
+  }
+}

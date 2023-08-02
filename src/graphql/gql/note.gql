@@ -1,0 +1,31 @@
+fragment note on NoteEntity {
+  id
+  note
+  clientId
+}
+
+query GetNotes($take: Int!, $skip: Int!, $clientId: String!, $search: String!) {
+  getNotes(take: $take, skip: $skip, clientId: $clientId, search: $search) {
+    ...note
+  }
+}
+query GetNote($noteId: String!) {
+  getNote(noteId: $noteId) {
+    ...note
+  }
+}
+mutation CreateNote($clientId: String!, $note: String!, $workspaceId: String!) {
+  createNote(clientId: $clientId, note: $note, workspaceId: $workspaceId) {
+    ...note
+  }
+}
+mutation DeleteNote($noteId: String!) {
+  deleteNote(noteId: $noteId) {
+    ...note
+  }
+}
+mutation UpdateNote($note: String!, $noteId: String!) {
+  updateNote(note: $note, noteId: $noteId) {
+    ...note
+  }
+}

@@ -1,0 +1,24 @@
+fragment prompt on PromptEntity {
+  id
+  name
+  category
+  description
+  value
+  createdAt
+}
+
+query GetPrompts {
+  getPrompts {
+    ...prompt
+  }
+}
+
+query GetPrompt($promptId: String!) {
+  getPrompt(promptId: $promptId) {
+    ...prompt
+  }
+}
+
+query GetSystemPrompt($clientId: String!, $promptId: String!) {
+  getSystemPrompt(clientId: $clientId, promptId: $promptId)
+}

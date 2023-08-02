@@ -1,0 +1,42 @@
+fragment firm on FirmEntity {
+  id
+  name
+  avatar
+  createdAt
+}
+
+query GetFirms($take: Int!, $skip: Int!, $search: String) {
+  getFirms(take: $take, skip: $skip, search: $search) {
+    ...firm
+  }
+}
+
+query GetFirm($firmId: String!) {
+  getFirm(firmId: $firmId) {
+    ...firm
+  }
+}
+
+mutation CreateFirm($name: String!) {
+  createFirm(name: $name) {
+    ...firm
+  }
+}
+
+mutation UpdateFirm($id: String!, $name: String!) {
+  updateFirm(id: $id, name: $name) {
+    ...firm
+  }
+}
+
+mutation DeleteFirm($firmId: String!) {
+  deleteFirm(firmId: $firmId)
+}
+
+mutation GetFirmAvatarSignedUrl($hash: String!, $ext: EImageExtension!) {
+  getFirmAvatarSignedUrl(hash: $hash, ext: $ext)
+}
+
+mutation SetFirmAvatar {
+  setFirmAvatar
+}
